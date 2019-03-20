@@ -8,7 +8,7 @@ use App\Events\ErrorSent;
 use App\Events\MarketsSent;
 use App\Market;
 use GuzzleHttp\Client;
-use \GuzzleHttp\Psr7\Request as GHPR;
+use \GuzzleHttp\Psr7\Request;
 use Illuminate\Http\JsonResponse;
 
 class ApiController extends Controller
@@ -63,17 +63,17 @@ class ApiController extends Controller
     public function sendResult(int $marketId, int $currencyId)
     {
         try {
-        $client = new Client();
-        $market = Market::find($marketId);
-        $currency = Currency::find($currencyId);
-        $link = sprintf($market->link, $currency->code, $market->api_key);
+            $client = new Client();
+            $market = Market::find($marketId);
+            $currency = Currency::find($currencyId);
+            $link = sprintf($market->link, $currency->code, $market->api_key);
 
 
-        $request = new GHPR('GET', $link);
-        $promise = $client->sendAsync($request)->then(function ($response) {
-           echo $response->getBody();
-        });
-        $promise->wait();
+            $request = new Request('GET', $link);
+            $promise = $client->sendAsync($request)->then(function ($response) {
+                echo $response->getBody();
+            });
+            $promise->wait();
 
         } catch (\Exception $e) {
             event(

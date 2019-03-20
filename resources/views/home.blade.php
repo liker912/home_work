@@ -10,11 +10,12 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
 
 </head>
 <body>
 <div id="currency-app">
-    <h1>reet</h1>
+    <currency-component></currency-component>
 </div>
 
 <script src="js/app.js"></script>

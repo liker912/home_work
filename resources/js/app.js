@@ -15,13 +15,13 @@ window.Vue = require('vue');
  * Vue components. It will recursively scan this directory for the Vue
  * components and automatically register them with their "basename".
  *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
+ * Eg. ./components/CurrencyComponent.vue -> <example-component></example-component>
  */
 
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('currency-component', require('./components/CurrencyComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -32,10 +32,11 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#currency-app',
 
+
     created() {
-       window.Echo.channel('currency').listen('CurrencySent', (event) => {
-           console.log('EVENT', event);
-       })
+        window.Echo.channel('errorChannel').listen('ErrorSent', (errors) => {
+            console.log('errorChanel', errors);
+        })
     }
 });
 

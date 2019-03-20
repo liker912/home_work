@@ -4,26 +4,25 @@ namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Support\Collection;
 
-class CurrencySent implements ShouldBroadcast
+class CurrenciesSent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $message;
+    public $currencies;
 
     /**
-     * Create a new event instance.
+     * CurrenciesSent constructor.
      *
-     * @return void
+     * @param array $currencies
      */
-    public function __construct(String $message)
+    public function __construct(Collection $currencies)
     {
-        $this->message = $message;
+        $this->currencies = $currencies;
     }
 
     /**
@@ -31,8 +30,8 @@ class CurrencySent implements ShouldBroadcast
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-    public function broadcastOn()
+    public function broadcastOn(): Channel
     {
-        return new Channel('currency');
+        return new Channel('currencyChannel');
     }
 }

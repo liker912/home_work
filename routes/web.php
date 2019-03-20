@@ -11,4 +11,4 @@
 |
 */
 
-Route::get('/', 'CurrencyController@index');
+Route::get('/', 'WebController@index');

@@ -37,7 +37,7 @@
                 console.log(this.$store.state.currencies)
 
                 if (!this.$store.state.currentCurrency) {
-                    this.$store.commit('setCurrentCurrency', this.markets[0]);
+                    this.$store.commit('setCurrentCurrency', this.currencies[0]);
                 }
 
                 console.log("currentCurrency", this.$store.state.currentCurrency);

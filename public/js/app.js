@@ -1799,7 +1799,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(_this.$store.state.currencies);
 
       if (!_this.$store.state.currentCurrency) {
-        _this.$store.commit('setCurrentCurrency', _this.markets[0]);
+        _this.$store.commit('setCurrentCurrency', _this.currencies[0]);
       }
 
       console.log("currentCurrency", _this.$store.state.currentCurrency);
@@ -61011,7 +61011,7 @@ var store = new Vuex.Store({
       state.currentMarket = currentMarket;
     },
     setCurrentCurrency: function setCurrentCurrency(state, currentCurrency) {
-      state.currentMarket = currentCurrency;
+      state.currentCurrency = currentCurrency;
     }
   }
 });

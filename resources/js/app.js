@@ -40,7 +40,7 @@ const store = new Vuex.Store({
         },
 
         setCurrentCurrency(state, currentCurrency) {
-            state.currentMarket = currentCurrency;
+            state.currentCurrency = currentCurrency;
         }
     }
 });

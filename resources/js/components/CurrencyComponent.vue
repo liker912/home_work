@@ -3,9 +3,9 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                   <select>
-                       <option v-for="currency in currencies" :value="currency.id">{{currency.code}}</option>
-                   </select>
+                    <select>
+                        <option v-for="currency in currencies" :value="currency.id">{{currency.code}}</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -15,10 +15,10 @@
 <script>
     export default {
         name: "CurrencyComponent",
-        data: function () {
-            return {
-                currencies: [],
-                markets: []
+
+        computed: {
+            currencies: function () {
+                return this.$store.state.currencies;
             }
         },
 
@@ -32,14 +32,15 @@
             this.getCurrencies();
 
             window.Echo.channel('currencyChannel').listen('CurrenciesSent', (response) => {
-                this.currencies = response.currencies;
+                this.$store.commit('setCurrencies', response.currencies)
+                console.log(this.$store.state.currencies)
             });
         }
     }
 </script>
 
 <style>
-    select{
+    select {
         font-size: 16px;
     }
 </style>

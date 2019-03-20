@@ -9,6 +9,34 @@ import Echo from "laravel-echo";
 require('./bootstrap');
 
 window.Vue = require('vue');
+window.Vuex = require('vuex');
+
+Vue.use(Vuex);
+
+
+/**
+ * Vuex store
+ */
+
+const store = new Vuex.Store({
+    state: {
+        markets: [],
+        currencies:[],
+        currentMarket: null,
+        currentCurrency: null
+    },
+
+    mutations: {
+
+        setMarkets(state, markets) {
+            state.markets = markets;
+        },
+
+        setCurrencies(state, currencies) {
+            state.currencies = currencies
+        }
+    }
+});
 
 /**
  * The following block of code may be used to automatically register your
@@ -31,7 +59,7 @@ Vue.component('market-component', require('./components/MarketComponent.vue').de
 
 const app = new Vue({
     el: '#currency-app',
-
+    store,
 
     created() {
         window.Echo.channel('errorChannel').listen('ErrorSent', (errors) => {

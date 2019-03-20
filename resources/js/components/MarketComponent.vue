@@ -15,9 +15,10 @@
 <script>
     export default {
         name: "MarketComponent",
-        data: function () {
-            return {
-                markets: []
+
+        computed: {
+            markets: function () {
+                return this.$store.state.markets;
             }
         },
 
@@ -31,7 +32,8 @@
             this.getMarkets();
 
             window.Echo.channel('marketChannel').listen('MarketsSent', (response) => {
-                this.markets = response.markets;
+                this.$store.commit('setMarkets', response.markets);
+                console.log(this.$store.state.markets);
             });
         }
     }

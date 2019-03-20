@@ -25,6 +25,7 @@
         methods: {
             getCurrencies: function () {
                 axios.get('/api/currencies');
+                // this.$store.commit('setCurrentMarket', this.currencies)
             }
         },
 
@@ -32,8 +33,14 @@
             this.getCurrencies();
 
             window.Echo.channel('currencyChannel').listen('CurrenciesSent', (response) => {
-                this.$store.commit('setCurrencies', response.currencies)
+                this.$store.commit('setCurrencies', response.currencies);
                 console.log(this.$store.state.currencies)
+
+                if (!this.$store.state.currentCurrency) {
+                    this.$store.commit('setCurrentCurrency', this.markets[0]);
+                }
+
+                console.log("currentCurrency", this.$store.state.currentCurrency);
             });
         }
     }

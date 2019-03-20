@@ -33,7 +33,12 @@
 
             window.Echo.channel('marketChannel').listen('MarketsSent', (response) => {
                 this.$store.commit('setMarkets', response.markets);
-                console.log(this.$store.state.markets);
+
+                if (!this.$store.state.currentMarket) {
+                    this.$store.commit('setCurrentMarket', this.markets[0]);
+                }
+
+                console.log("currentMarket", this.$store.state.currentMarket);
             });
         }
     }

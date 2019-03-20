@@ -1786,7 +1786,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getCurrencies: function getCurrencies() {
-      axios.get('/api/currencies');
+      axios.get('/api/currencies'); // this.$store.commit('setCurrentMarket', this.currencies)
     }
   },
   mounted: function mounted() {
@@ -1797,6 +1797,12 @@ __webpack_require__.r(__webpack_exports__);
       _this.$store.commit('setCurrencies', response.currencies);
 
       console.log(_this.$store.state.currencies);
+
+      if (!_this.$store.state.currentCurrency) {
+        _this.$store.commit('setCurrentCurrency', _this.markets[0]);
+      }
+
+      console.log("currentCurrency", _this.$store.state.currentCurrency);
     });
   }
 });
@@ -1845,7 +1851,11 @@ __webpack_require__.r(__webpack_exports__);
     window.Echo.channel('marketChannel').listen('MarketsSent', function (response) {
       _this.$store.commit('setMarkets', response.markets);
 
-      console.log(_this.$store.state.markets);
+      if (!_this.$store.state.currentMarket) {
+        _this.$store.commit('setCurrentMarket', _this.markets[0]);
+      }
+
+      console.log("currentMarket", _this.$store.state.currentMarket);
     });
   }
 });
@@ -60996,6 +61006,12 @@ var store = new Vuex.Store({
     },
     setCurrencies: function setCurrencies(state, currencies) {
       state.currencies = currencies;
+    },
+    setCurrentMarket: function setCurrentMarket(state, currentMarket) {
+      state.currentMarket = currentMarket;
+    },
+    setCurrentCurrency: function setCurrentCurrency(state, currentCurrency) {
+      state.currentMarket = currentCurrency;
     }
   }
 });

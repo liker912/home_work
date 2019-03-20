@@ -27,13 +27,20 @@ const store = new Vuex.Store({
     },
 
     mutations: {
-
         setMarkets(state, markets) {
             state.markets = markets;
         },
 
         setCurrencies(state, currencies) {
             state.currencies = currencies
+        },
+
+        setCurrentMarket(state, currentMarket) {
+            state.currentMarket = currentMarket;
+        },
+
+        setCurrentCurrency(state, currentCurrency) {
+            state.currentMarket = currentCurrency;
         }
     }
 });

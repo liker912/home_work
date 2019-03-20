@@ -9,8 +9,7 @@ use Illuminate\Http\JsonResponse;
 
 class ApiController extends Controller
 {
-
-
+    
     /**
      * Get all currency from database and send it via web socket
      *

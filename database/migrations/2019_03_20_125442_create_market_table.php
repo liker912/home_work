@@ -15,7 +15,9 @@ class CreateMarketTable extends Migration
     {
         Schema::create('market', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name', 20);
             $table->string('link', 50);
+            $table->string('api_key', 100);
             $table->timestamps();
         });
     }

@@ -9,6 +9,6 @@ class Market extends Model
     //
     protected $table = "market";
 
-    protected $fillable = ["id", "link"];
+    protected $fillable = ["id", "link", "api_key"];
 
 }

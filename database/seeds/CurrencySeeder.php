@@ -18,6 +18,7 @@ class CurrencySeeder extends Seeder
                 array(
                     "code" => "USD"
                 ),
+
                 array(
                     "code" => "EUR"
                 ),

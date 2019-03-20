@@ -7,6 +7,8 @@ use App\Events\CurrenciesSent;
 use App\Events\ErrorSent;
 use App\Events\MarketsSent;
 use App\Market;
+use GuzzleHttp\Client;
+use \GuzzleHttp\Psr7\Request as GHPR;
 use Illuminate\Http\JsonResponse;
 
 class ApiController extends Controller
@@ -35,6 +37,10 @@ class ApiController extends Controller
     }
 
 
+    /**
+     * Get all markets from database and send it via web socket
+     *
+     */
     public function sendMarkets()
     {
         try {
@@ -54,8 +60,30 @@ class ApiController extends Controller
     }
 
 
-    public function getCurrencyFromMarket(String $market, String $currency): JsonResponse
+    public function sendResult(int $marketId, int $currencyId)
     {
-        $currency = array(array($currency => "234"));
+        try {
+        $client = new Client();
+        $market = Market::find($marketId);
+        $currency = Currency::find($currencyId);
+        $link = sprintf($market->link, $currency->code, $market->api_key);
+
+
+        $request = new GHPR('GET', $link);
+        $promise = $client->sendAsync($request)->then(function ($response) {
+           echo $response->getBody();
+        });
+        $promise->wait();
+
+        } catch (\Exception $e) {
+            event(
+                new ErrorSent(
+                    array(
+                        "message" => $e->getMessage(),
+                        "code" => $e->getCode()
+                    )
+                )
+            );
+        }
     }
 }

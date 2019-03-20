@@ -25,23 +25,23 @@
         methods: {
             getCurrencies: function () {
                 axios.get('/api/currencies');
-                // this.$store.commit('setCurrentMarket', this.currencies)
             }
         },
 
         mounted() {
             this.getCurrencies();
+            
+            window.Echo.channel('currencyChannel')
+                .listen('CurrenciesSent', (response) => {
+                    this.$store.commit('setCurrencies', response.currencies);
+                    console.log(this.$store.state.currencies)
 
-            window.Echo.channel('currencyChannel').listen('CurrenciesSent', (response) => {
-                this.$store.commit('setCurrencies', response.currencies);
-                console.log(this.$store.state.currencies)
+                    if (!this.$store.state.currentCurrency) {
+                        this.$store.commit('setCurrentCurrency', this.currencies[0]);
+                    }
 
-                if (!this.$store.state.currentCurrency) {
-                    this.$store.commit('setCurrentCurrency', this.currencies[0]);
-                }
-
-                console.log("currentCurrency", this.$store.state.currentCurrency);
-            });
+                    console.log("currentCurrency", this.$store.state.currentCurrency);
+                });
         }
     }
 </script>

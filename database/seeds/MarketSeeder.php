@@ -17,13 +17,13 @@ class MarketSeeder extends Seeder
             array(
                 array(
                     "name" => "coinapi.io",
-                    "link" => "https://rest.coinapi.io/v1/exchangerate/",
+                    "link" => "https://rest.coinapi.io/v1/exchangerate/%s?apikey=%s",
                     "api_key" => "C7D7FCE8-DEFE-4812-9ABC-7E783495F313"
                 ),
 
                 array(
                     "name" => "nomics.com",
-                    "link" => "https://api.nomics.com/v1/currencies/",
+                    "link" => "https://api.nomics.com/v1/currencies/ticker?quote-currency=%s&key=%s",
                     "api_key" => "a9128db7756b37870993952838513bce"
                 )
             )

@@ -1786,7 +1786,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getCurrencies: function getCurrencies() {
-      axios.get('/api/currencies'); // this.$store.commit('setCurrentMarket', this.currencies)
+      axios.get('/api/currencies');
     }
   },
   mounted: function mounted() {

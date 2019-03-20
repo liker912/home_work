@@ -22,13 +22,13 @@
         },
 
         methods: {
-            getCurrencies: function () {
+            getMarkets: function () {
                 axios.get('/api/markets');
             }
         },
 
         mounted() {
-            this.getCurrencies();
+            this.getMarkets();
 
             window.Echo.channel('marketChannel').listen('MarketsSent', (response) => {
                 this.markets = response.markets;

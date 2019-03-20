@@ -1833,14 +1833,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getCurrencies: function getCurrencies() {
+    getMarkets: function getMarkets() {
       axios.get('/api/markets');
     }
   },
   mounted: function mounted() {
     var _this = this;
 
-    this.getCurrencies();
+    this.getMarkets();
     window.Echo.channel('marketChannel').listen('MarketsSent', function (response) {
       _this.markets = response.markets;
     });

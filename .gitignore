@@ -14,3 +14,4 @@ yarn-error.log
 .editorconfig
 composer.lock
 node_modules/
+package-lock.json

@@ -1,3 +1,4 @@
+import Echo from "laravel-echo";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -29,5 +30,12 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#currency-app',
+
+    created() {
+       window.Echo.channel('currency').listen('CurrencySent', (event) => {
+           console.log('EVENT', event);
+       })
+    }
 });
+

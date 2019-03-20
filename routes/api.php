@@ -14,4 +14,5 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/currencies', 'ApiController@sendCurrencies');
+Route::get('/markets', 'ApiController@sendMarkets');
 Route::get('/{market}/{currency}', 'ApiController@getCurrencyFromMarket');

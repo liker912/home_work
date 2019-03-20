@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Currency;
 use App\Events\CurrenciesSent;
 use App\Events\ErrorSent;
+use App\Events\MarketsSent;
+use App\Market;
 use Illuminate\Http\JsonResponse;
 
 class ApiController extends Controller
 {
-    
+
     /**
      * Get all currency from database and send it via web socket
      *
@@ -19,6 +21,25 @@ class ApiController extends Controller
         try {
             $currencies = Currency::all();
             event(new CurrenciesSent($currencies));
+
+        } catch (\Exception $e) {
+            event(
+                new ErrorSent(
+                    array(
+                        "message" => $e->getMessage(),
+                        "code" => $e->getCode()
+                    )
+                )
+            );
+        }
+    }
+
+
+    public function sendMarkets()
+    {
+        try {
+            $markets = Market::all();
+            event(new MarketsSent($markets));
 
         } catch (\Exception $e) {
             event(

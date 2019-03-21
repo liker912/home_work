@@ -10,7 +10,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 window.Vuex = require('vuex');
-
+require('sweetalert');
 var Chart = require('chart.js')
 
 Vue.use(Vuex);
@@ -23,7 +23,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         markets: [],
-        currencies:[],
+        currencies: [],
         currentMarket: null,
         currentCurrency: null,
         results: null,
@@ -78,8 +78,13 @@ const app = new Vue({
     store,
 
     created() {
-        window.Echo.channel('errorChannel').listen('ErrorSent', (errors) => {
-            console.log('errorChanel', errors);
+        window.Echo.channel('errorChannel').listen('ErrorSent', (error) => {
+            swal({
+                title: "Error #" + error.error.code,
+                text: error.error.message,
+                icon: "error",
+
+            });
         })
     }
 });

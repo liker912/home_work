@@ -1,6 +1,6 @@
 <template>
     <div class="col-md-4">
-        <select class="form-control">f
+        <select class="form-control" @change="onChange($event)">
             <option v-for="market in markets" :value="market.id">{{market.name}}</option>
         </select>
     </div>
@@ -13,6 +13,10 @@
         computed: {
             markets: function () {
                 return this.$store.state.markets;
+            },
+
+            currency: function () {
+                return this.$store.state.currentCurrency;
             }
         },
 
@@ -24,7 +28,31 @@
                         this.$store.commit('setCurrentMarket', this.markets[0]);
                     })
                     .catch((error) => {
+                        swal({
+                            title: "Error #" + error.code,
+                            text: error.message,
+                            icon: "error",
 
+                        });
+                    })
+            },
+
+            onChange() {
+                axios.get(/api/ + event.target.value + '/' + this.currency.id)
+                    .then(() => {
+                        this.markets.forEach((data) => {
+                            if (data.id === event.target.value) {
+                                this.$store.commit('setCurrentMarket', data);
+                            }
+                        });
+                    })
+                    .catch((error) => {
+                        swal({
+                            title: "Error #" + error.code,
+                            text: error.message,
+                            icon: "error",
+
+                        });
                     })
             }
         },

@@ -56,7 +56,6 @@
             this.getResult();
             window.Echo.channel('resultChannel').listen('ResultSent', (response) => {
                 this.$store.commit('setResults', response);
-
                 var ctx = document.getElementById('myChart');
                 var leabels = [];
                 var datas = [];
@@ -70,7 +69,7 @@
                     data: {
                         labels: leabels,
                         datasets: [{
-                            label: 'from ' + this.market.name + ' for ' + this.currency.code,
+                            label: "Graphic",
                             data: datas,
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',

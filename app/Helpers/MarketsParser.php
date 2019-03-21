@@ -9,6 +9,8 @@
 namespace App\Helpers;
 
 
+use Carbon\Carbon;
+
 /**
  * Class MarketsParser - Parse json response from markets
  *
@@ -20,8 +22,8 @@ class MarketsParser
      * Helper function for reading response from markets and preapare structure for saving to db and sending to client
      *
      * @param int    $currencyId - id of currency
-     * @param int    $marketId - id of market
-     * @param String $response - response from market
+     * @param int    $marketId   - id of market
+     * @param String $response   - response from market
      *
      * @return array
      */
@@ -43,7 +45,9 @@ class MarketsParser
                 "market_id" => $marketId,
                 "currency_id" => $currencyId,
                 "crypto_currency_code" => self::getValueFromMarketByParam('crypto_currency_code', $marketId, $rate),
-                "price_value" => self::getValueFromMarketByParam('price_value', $marketId, $rate)
+                "price_value" => self::getValueFromMarketByParam('price_value', $marketId, $rate),
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
             );
 
             if ($step < $limit) {
@@ -62,9 +66,9 @@ class MarketsParser
      * Because markets has different structure and column names I created helper function for
      * reading specific column like currency code and currency price
      *
-     * @param String $param - parameter for searching in response for example price or crypto currency name
+     * @param String $param     - parameter for searching in response for example price or crypto currency name
      * @param int    $market_id - id of market
-     * @param        $rate - link to object
+     * @param        $rate      - link to object
      *
      * @return null
      */

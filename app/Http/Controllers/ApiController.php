@@ -7,6 +7,7 @@ use App\Events\ErrorSent;
 use App\Helpers\MarketsParser;
 use App\Http\Resources\CurrencyCollection;
 use App\Http\Resources\MarketCollection;
+use App\Result;
 use App\Market;
 use GuzzleHttp\Client;
 use \GuzzleHttp\Psr7\Request;
@@ -63,7 +64,8 @@ class ApiController extends Controller
 
             $request = new Request('GET', $link);
             $promise = $client->sendAsync($request)->then(function ($response) use ($market, $currency) {
-                dd(MarketsParser::prepare($currency->id, $market->id, $response->getBody()));
+
+                Result::insert(MarketsParser::prepare($currency->id, $market->id, $response->getBody()));
             });
             $promise->wait();
 

@@ -24,7 +24,14 @@
 
         methods: {
             getMarkets: function () {
-                axios.get('/api/markets');
+                axios.get('/api/markets')
+                    .then((response) => {
+                        this.$store.commit('setMarkets', response.data.data);
+                        this.$store.commit('setCurrentMarket', this.currencies[0]);
+                    })
+                    .catch((error) => {
+
+                    })
             }
         },
 
@@ -33,19 +40,13 @@
 
             window.Echo.channel('marketChannel').listen('MarketsSent', (response) => {
                 this.$store.commit('setMarkets', response.markets);
-
-                if (!this.$store.state.currentMarket) {
-                    this.$store.commit('setCurrentMarket', this.markets[0]);
-                }
-
-                console.log("currentMarket", this.$store.state.currentMarket);
             });
         }
     }
 </script>
 
 <style>
-    select{
+    select {
         font-size: 16px;
     }
 </style>

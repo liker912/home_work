@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/currencies', 'ApiController@sendCurrencies');
-Route::get('/markets', 'ApiController@sendMarkets');
+Route::get('/currencies', 'ApiController@getCurrencies');
+Route::get('/markets', 'ApiController@getMarkets');
 Route::get('/{market}/{currency}', 'ApiController@sendResult');

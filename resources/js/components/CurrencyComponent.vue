@@ -24,23 +24,23 @@
 
         methods: {
             getCurrencies: function () {
-                axios.get('/api/currencies');
+                axios.get('/api/currencies')
+                    .then((response) => {
+                        this.$store.commit('setCurrencies', response.data.data);
+                        this.$store.commit('setCurrentCurrency', this.currencies[0]);
+                    })
+                    .catch((error) => {
+
+                    })
             }
         },
 
         mounted() {
             this.getCurrencies();
-            
+
             window.Echo.channel('currencyChannel')
                 .listen('CurrenciesSent', (response) => {
                     this.$store.commit('setCurrencies', response.currencies);
-                    console.log(this.$store.state.currencies)
-
-                    if (!this.$store.state.currentCurrency) {
-                        this.$store.commit('setCurrentCurrency', this.currencies[0]);
-                    }
-
-                    console.log("currentCurrency", this.$store.state.currentCurrency);
                 });
         }
     }

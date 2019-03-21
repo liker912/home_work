@@ -1786,23 +1786,21 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getCurrencies: function getCurrencies() {
-      axios.get('/api/currencies');
+      var _this = this;
+
+      axios.get('/api/currencies').then(function (response) {
+        _this.$store.commit('setCurrencies', response.data.data);
+
+        _this.$store.commit('setCurrentCurrency', _this.currencies[0]);
+      }).catch(function (error) {});
     }
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     this.getCurrencies();
     window.Echo.channel('currencyChannel').listen('CurrenciesSent', function (response) {
-      _this.$store.commit('setCurrencies', response.currencies);
-
-      console.log(_this.$store.state.currencies);
-
-      if (!_this.$store.state.currentCurrency) {
-        _this.$store.commit('setCurrentCurrency', _this.currencies[0]);
-      }
-
-      console.log("currentCurrency", _this.$store.state.currentCurrency);
+      _this2.$store.commit('setCurrencies', response.currencies);
     });
   }
 });
@@ -1841,21 +1839,21 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getMarkets: function getMarkets() {
-      axios.get('/api/markets');
+      var _this = this;
+
+      axios.get('/api/markets').then(function (response) {
+        _this.$store.commit('setMarkets', response.data.data);
+
+        _this.$store.commit('setCurrentMarket', _this.currencies[0]);
+      }).catch(function (error) {});
     }
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     this.getMarkets();
     window.Echo.channel('marketChannel').listen('MarketsSent', function (response) {
-      _this.$store.commit('setMarkets', response.markets);
-
-      if (!_this.$store.state.currentMarket) {
-        _this.$store.commit('setCurrentMarket', _this.markets[0]);
-      }
-
-      console.log("currentMarket", _this.$store.state.currentMarket);
+      _this2.$store.commit('setMarkets', response.markets);
     });
   }
 });
@@ -6338,7 +6336,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nselect{\n    font-size: 16px;\n}\n", ""]);
+exports.push([module.i, "\nselect {\n    font-size: 16px;\n}\n", ""]);
 
 // exports
 

@@ -3,59 +3,52 @@
 namespace App\Http\Controllers;
 
 use App\Currency;
-use App\Events\CurrenciesSent;
 use App\Events\ErrorSent;
-use App\Events\MarketsSent;
+use App\Http\Resources\CurrencyCollection;
+use App\Http\Resources\MarketCollection;
 use App\Market;
 use GuzzleHttp\Client;
 use \GuzzleHttp\Psr7\Request;
-use Illuminate\Http\JsonResponse;
+use App\Helpers\Logs;
 
 class ApiController extends Controller
 {
 
-    /**
-     * Get all currency from database and send it via web socket
-     *
-     */
-    public function sendCurrencies()
+
+    public function getCurrencies()
     {
         try {
             $currencies = Currency::all();
-            event(new CurrenciesSent($currencies));
+
+            // write to logs
+            Logs::getInstance()->writeToLog("Get currency successfully");
+            return new CurrencyCollection($currencies);
 
         } catch (\Exception $e) {
-            event(
-                new ErrorSent(
-                    array(
-                        "message" => $e->getMessage(),
-                        "code" => $e->getCode()
-                    )
-                )
-            );
+            $response = array("message" => $e->getMessage(), "code" => $e->getCode());
+
+            // write to logs
+            Logs::getInstance()->writeToLog($e->getMessage());
+            return response()->json($response, 500);
         }
     }
 
 
-    /**
-     * Get all markets from database and send it via web socket
-     *
-     */
-    public function sendMarkets()
+    public function getMarkets()
     {
         try {
             $markets = Market::all();
-            event(new MarketsSent($markets));
 
+            // write to logs
+            Logs::getInstance()->writeToLog("Get currency successfully");
+            return new MarketCollection($markets);
+            
         } catch (\Exception $e) {
-            event(
-                new ErrorSent(
-                    array(
-                        "message" => $e->getMessage(),
-                        "code" => $e->getCode()
-                    )
-                )
-            );
+            $response = array("message" => $e->getMessage(), "code" => $e->getCode());
+
+            // write to logs
+            Logs::getInstance()->writeToLog($e->getMessage());
+            return response()->json($response, 500);
         }
     }
 

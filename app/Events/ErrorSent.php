@@ -32,7 +32,7 @@ class ErrorSent implements ShouldBroadcast
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-    public function broadcastOn(): Channel
+    public function broadcastOn()
     {
         return new Channel('errorChannel');
     }

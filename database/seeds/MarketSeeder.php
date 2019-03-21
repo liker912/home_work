@@ -18,7 +18,7 @@ class MarketSeeder extends Seeder
                 array(
                     "name" => "coinapi.io",
                     "link" => "https://rest.coinapi.io/v1/exchangerate/%s?apikey=%s",
-                    "api_key" => "C7D7FCE8-DEFE-4812-9ABC-7E783495F313"
+                    "api_key" => "B751EE23-03E6-4AB3-9EC2-DBA7F4B395E8"
                 ),
 
                 array(

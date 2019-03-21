@@ -5,7 +5,7 @@ websockets. For websockets on this projects read  <a href="https://docs.beyondco
 
 ### Hosting
 
-To do
+<a href="http://home-task.rlikhovich.xyz/">Live demo</a>
 
 
 ### Deployment

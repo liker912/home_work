@@ -1797,12 +1797,12 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    onChange: function onChange() {
+    onChange: function onChange(event) {
       var _this2 = this;
 
       axios.get(/api/ + this.market.id + '/' + event.target.value).then(function () {
         _this2.currencies.forEach(function (data) {
-          if (data.id === event.target.value) {
+          if (data.id === parseInt(event.target.value)) {
             _this2.$store.commit('setCurrentCurrency', data);
           }
         });
@@ -1935,12 +1935,14 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    onChange: function onChange() {
+    onChange: function onChange(event) {
       var _this2 = this;
 
       axios.get(/api/ + event.target.value + '/' + this.currency.id).then(function () {
         _this2.markets.forEach(function (data) {
-          if (data.id === event.target.value) {
+          if (data.id === parseInt(event.target.value)) {
+            console.log("DDD");
+
             _this2.$store.commit('setCurrentMarket', data);
           }
         });

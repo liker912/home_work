@@ -37,11 +37,12 @@
                     })
             },
 
-            onChange() {
+            onChange(event) {
                 axios.get(/api/ + event.target.value + '/' + this.currency.id)
                     .then(() => {
                         this.markets.forEach((data) => {
-                            if (data.id === event.target.value) {
+                            if (data.id === parseInt(event.target.value)) {
+                                console.log("DDD");
                                 this.$store.commit('setCurrentMarket', data);
                             }
                         });

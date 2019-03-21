@@ -63,7 +63,7 @@ class ApiController extends Controller
 
             $request = new Request('GET', $link);
             $promise = $client->sendAsync($request)->then(function ($response) use ($market, $currency) {
-                (MarketsParser::prepare($currency->id, $market->id, $response->getBody()));
+                dd(MarketsParser::prepare($currency->id, $market->id, $response->getBody()));
             });
             $promise->wait();
 

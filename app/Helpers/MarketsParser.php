@@ -75,20 +75,20 @@ class MarketsParser
             case 1:
                 switch ($param) {
                     case 'crypto_currency_code':
-                        $marketsParam = $rate->asset_id_quote;
+                        $marketValue = $rate->asset_id_quote;
                         break;
                     case 'price_value':
-                        $marketsParam = $rate->rate;
+                        $marketValue = $rate->rate;
                         break;
                 }
                 break;
             case 2:
                 switch ($param) {
                     case 'crypto_currency_code':
-                        $marketsParam = $rate->currency;
+                        $marketValue = $rate->currency;
                         break;
                     case 'price_value':
-                        $marketsParam = $rate->price;
+                        $marketValue = $rate->price;
                         break;
                 }
                 break;

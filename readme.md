@@ -13,7 +13,15 @@ Project should be deploy manually via git clone. <br>
 
 ### Installation:
 Copy .env.example -> .env<br>
-Open .env file and put your database settings <br> 
+Open .env file and put your database settings and app URL<br> 
+
+````
+APP_URL=http://your_app_url
+
+DB_DATABASE=your_db_name
+DB_USERNAME=your_db_user
+DB_PASSWORD=your_db_password
+````
   
 Install laravel, generate application key:
 ````

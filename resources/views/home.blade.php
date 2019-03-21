@@ -17,8 +17,7 @@
 </head>
 <body>
 <div id="currency-app">
-    <market-component></market-component>
-    <currency-component></currency-component>
+   <main-component></main-component>
 </div>
 
 <script src="js/app.js"></script>

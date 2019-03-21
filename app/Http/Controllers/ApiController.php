@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Currency;
 use App\Events\ErrorSent;
+use App\Events\ResultSent;
 use App\Helpers\MarketsParser;
 use App\Http\Resources\CurrencyCollection;
 use App\Http\Resources\MarketCollection;
@@ -64,8 +65,9 @@ class ApiController extends Controller
 
             $request = new Request('GET', $link);
             $promise = $client->sendAsync($request)->then(function ($response) use ($market, $currency) {
-
-                Result::insert(MarketsParser::prepare($currency->id, $market->id, $response->getBody()));
+                $result = MarketsParser::prepare($currency->id, $market->id, $response->getBody());
+                Result::insert($result);
+                event(new ResultSent($result, $market->name, $currency->code));
             });
             $promise->wait();
 

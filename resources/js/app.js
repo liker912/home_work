@@ -23,7 +23,8 @@ const store = new Vuex.Store({
         markets: [],
         currencies:[],
         currentMarket: null,
-        currentCurrency: null
+        currentCurrency: null,
+        results: null,
     },
 
     mutations: {
@@ -41,8 +42,12 @@ const store = new Vuex.Store({
 
         setCurrentCurrency(state, currentCurrency) {
             state.currentCurrency = currentCurrency;
-        }
-    }
+        },
+
+        setResults(state, results) {
+            state.results = results;
+        },
+    },
 });
 
 /**
@@ -58,6 +63,8 @@ const store = new Vuex.Store({
 
 Vue.component('currency-component', require('./components/CurrencyComponent.vue').default);
 Vue.component('market-component', require('./components/MarketComponent.vue').default);
+Vue.component('result-component', require('./components/ResultComponent.vue').default);
+Vue.component('main-component', require('./components/MainComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

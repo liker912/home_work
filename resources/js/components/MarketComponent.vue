@@ -27,7 +27,7 @@
                 axios.get('/api/markets')
                     .then((response) => {
                         this.$store.commit('setMarkets', response.data.data);
-                        this.$store.commit('setCurrentMarket', this.currencies[0]);
+                        this.$store.commit('setCurrentMarket', this.markets[0]);
                     })
                     .catch((error) => {
 

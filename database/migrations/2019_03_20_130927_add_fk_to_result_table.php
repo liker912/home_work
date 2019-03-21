@@ -26,7 +26,7 @@ class AddFkToResultTable extends Migration
      */
     public function down()
     {
-        Schema::table('results', function (Blueprint $table) {
+        Schema::table('result', function (Blueprint $table) {
             $table->dropForeign(['market_id']);
             $table->dropForeign(['currency_id']);
         });

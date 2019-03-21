@@ -1,8 +1,12 @@
 <template>
-    <div>
-        <market-component></market-component>
-        <currency-component></currency-component>
-        <result-component v-if="market && currency"></result-component>
+    <div class="container-fluid">
+        <div class="row justify-content-center mb-3">
+            <market-component></market-component>
+            <currency-component></currency-component>
+        </div>
+        <div class="row justify-content-center">
+            <result-component v-if="market && currency"></result-component>
+        </div>
     </div>
 </template>
 
@@ -57,3 +61,9 @@
         }
     }
 </script>
+
+<style>
+    body {
+        padding: 5%;
+    }
+</style>

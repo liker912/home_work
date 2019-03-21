@@ -1,14 +1,8 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <select>
-                        <option v-for="currency in currencies" :value="currency.id">{{currency.code}}</option>
-                    </select>
-                </div>
-            </div>
-        </div>
+    <div class="col-md-4">
+        <select class="form-control">
+            <option v-for="currency in currencies" :value="currency.id">{{currency.code}}</option>
+        </select>
     </div>
 </template>
 

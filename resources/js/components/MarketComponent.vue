@@ -1,14 +1,8 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <select>
-                        <option v-for="market in markets" :value="market.id">{{market.name}}</option>
-                    </select>
-                </div>
-            </div>
-        </div>
+    <div class="col-md-4">
+        <select class="form-control">f
+            <option v-for="market in markets" :value="market.id">{{market.name}}</option>
+        </select>
     </div>
 </template>
 

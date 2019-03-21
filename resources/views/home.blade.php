@@ -17,7 +17,7 @@
 </head>
 <body>
 <div id="currency-app">
-   <main-component></main-component>
+        <main-component></main-component>
 </div>
 
 <script src="js/app.js"></script>

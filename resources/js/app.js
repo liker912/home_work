@@ -11,6 +11,8 @@ require('./bootstrap');
 window.Vue = require('vue');
 window.Vuex = require('vuex');
 
+var Chart = require('chart.js')
+
 Vue.use(Vuex);
 
 

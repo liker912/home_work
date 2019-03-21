@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Currency;
 use App\Events\ErrorSent;
+use App\Helpers\MarketsParser;
 use App\Http\Resources\CurrencyCollection;
 use App\Http\Resources\MarketCollection;
 use App\Market;
@@ -13,7 +14,6 @@ use App\Helpers\Logs;
 
 class ApiController extends Controller
 {
-
 
     public function getCurrencies()
     {
@@ -42,7 +42,7 @@ class ApiController extends Controller
             // write to logs
             Logs::getInstance()->writeToLog("Get currency successfully");
             return new MarketCollection($markets);
-            
+
         } catch (\Exception $e) {
             $response = array("message" => $e->getMessage(), "code" => $e->getCode());
 
@@ -61,14 +61,14 @@ class ApiController extends Controller
             $currency = Currency::find($currencyId);
             $link = sprintf($market->link, $currency->code, $market->api_key);
 
-
             $request = new Request('GET', $link);
-            $promise = $client->sendAsync($request)->then(function ($response) {
-                echo $response->getBody();
+            $promise = $client->sendAsync($request)->then(function ($response) use ($market, $currency) {
+                (MarketsParser::prepare($currency->id, $market->id, $response->getBody()));
             });
             $promise->wait();
 
         } catch (\Exception $e) {
+            echo $e->getMessage();
             event(
                 new ErrorSent(
                     array(
